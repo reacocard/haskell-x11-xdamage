@@ -15,7 +15,8 @@
 
 module Graphics.X11.Xdamage(
     DamageReportLevel,
-    DamageNotify(..), 
+    DamageNotify(..),
+    Damage,
     xdamageCreate,
     xdamageDestroy,
     xdamageSubtract,
