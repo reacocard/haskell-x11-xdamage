@@ -17,6 +17,7 @@ module Graphics.X11.Xdamage(
     DamageReportLevel,
     DamageNotify(..),
     Damage,
+    xdamageAdd,
     xdamageCreate,
     xdamageDestroy,
     xdamageSubtract,
@@ -71,7 +72,7 @@ foreign import ccall "XDamageSubtract"
     xdamageSubtract :: Display -> Damage -> Ptr Region -> Ptr Region -> IO ()
 
 foreign import ccall "XDamageAdd"
-    xdamageAdd :: Display -> Drawable -> Ptr Region -> IO ()
+    xdamageAdd :: Display -> Drawable -> Region -> IO ()
 
 xdamageQueryExtension :: Display -> IO (Maybe (CInt, CInt))
 xdamageQueryExtension dpy = wrapPtr2 (cXdamageQueryExtension dpy) go
