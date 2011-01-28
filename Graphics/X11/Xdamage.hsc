@@ -27,10 +27,12 @@ module Graphics.X11.Xdamage(
 
 import Foreign
 import Foreign.C.Types
-import Graphics.X11.Xlib
+import Graphics.X11.Xlib hiding (Region) -- Use XID-based region from xfixes
+
+type Region = XID
 
 -- | DAMAGE is a 32 bit value where the top three bits are guaranteed to be 0
-type Damage = CInt
+type Damage = XID
 
 -- | 
 type DamageReportLevel = CInt
@@ -69,7 +71,7 @@ foreign import ccall "XDamageDestroy"
     xdamageDestroy :: Display -> Damage -> IO ()
 
 foreign import ccall "XDamageSubtract"
-    xdamageSubtract :: Display -> Damage -> Ptr Region -> Ptr Region -> IO ()
+    xdamageSubtract :: Display -> Damage -> Region -> Region -> IO ()
 
 foreign import ccall "XDamageAdd"
     xdamageAdd :: Display -> Drawable -> Region -> IO ()
